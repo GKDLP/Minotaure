@@ -3,9 +3,9 @@ import sys
 Labyrinthe = [["+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+","+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"],
               ["+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+","+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"],
               ["+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+","+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"],
-              ["+", "+", "+", "+", "+", "+", "_", "_", "_", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "_", "_", "_", "+", "+", "+"],
+              ["+", "+", "+", "+", "P", "+", "_", "_", "_", "+", "+", "+", "+", "+", "+", "+", "+", "+", "P", "_", "_", "_", "+", "+", "+"],
               ["+", "+", "+", "+", "_", "_", "_", "+", "_", "_", "_", "_", "_", "_", "+", "_", "_", "_", "+", "_", "+", "_", "+", "+", "+"],
-              ["+", "+", "+", "+", "+", "+", "+", "+", "_", "+", "+", "+", "+", "_", "+", "+", "+", "_", "+", "M", "+", "_", "+", "+", "+"],
+              ["+", "+", "+", "+", "+", "+", "+", "+", "_", "+", "+", "+", "+", "_", "P4", "P6", "+", "_", "+", "M", "+", "_", "+", "+", "+"],
               ["+", "+", "+", "T", "_", "_", "_", "+", "_", "+", "+", "+", "_", "_", "+", "_", "+", "_", "+", "+", "+", "_", "+", "+", "+"],
               ["+", "+", "+", "+", "_", "+", "_", "_", "_", "+", "+", "_", "_", "+", "+", "_", "+", "_", "_", "_", "_", "_", "+", "+", "+"],
               ["+", "+", "+", "+", "_", "+", "_", "+", "_", "+", "_", "_", "+", "_", "_", "_", "+", "_", "+", "+", "+", "+", "+", "+", "+"],
@@ -14,13 +14,13 @@ Labyrinthe = [["+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+","
               ["+", "+", "+", "+", "_", "+", "+", "+", "_", "+", "_", "+", "_", "+", "_", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"],
               ["+", "+", "+", "+", "_", "+", "+", "+", "_", "_", "_", "+", "_", "_", "_", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"],
               ["+", "+", "+", "+", "_", "+", "+", "_", "_", "+", "+", "+", "+", "_", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"],
-              ["+", "+", "+", "+", "_", "_", "+", "+", "_", "+", "+", "+", "_", "_", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"],
+              ["+", "+", "+", "+", "_", "_", "+", "+", "_", "+", "+", "+", "_", "_", "+", "+", "+", "+", "P3", "+", "+", "+", "+", "+", "+"],
               ["+", "+", "+", "+", "+", "_", "_", "+", "+", "_", "_", "_", "_", "+", "+", "+", "+", "+", "_", "_", "_", "+", "+", "+", "+"],
               ["+", "+", "+", "+", "+", "+", "_", "+", "+", "_", "+", "_", "+", "_", "_", "_", "+", "+", "_", "+", "_", "+", "+", "+", "+"],
               ["+", "+", "+", "+", "_", "_", "_", "_", "_", "_", "+", "_", "+", "_", "+", "+", "+", "+", "_", "+", "_", ":", "+", "+", "+"],
               ["+", "+", "+", "+", "_", "+", "+", "_", "+", "+", "+", "_", "+", "+", "+", "_", "_", "_", "_", "+", "_", "+", "+", "+", "+"],
               ["+", "+", "+", "+", "+", "+", "_", "_", "+", "+", "+", "_", "_", "_", "_", "_", "+", "+", "+", "+", "_", "+", "+", "+", "+"],
-              ["+", "+", "+", "+", "_", "_", "_", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "_", "_", "_", "+", "+", "+", "+"],
+              ["+", "+", "+", "P5", "_", "_", "_", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "_", "_", "_", "+", "+", "+", "+"],
               ["+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+","+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"],
               ["+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+","+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"],
               ["+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+","+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"]]
@@ -59,7 +59,6 @@ def AvancerD(Labyrinthe): # Avancer à droite de 1
         print("vous ne pouvez pas avancer, les murs du labyrinthe sont bien trop grand")
     else: 
         Labyrinthe[LigneT][ColoneT] = re.sub("T", "_", Labyrinthe[LigneT][ColoneT])
-        #Labyrinthe[LigneT][ColoneT] ==  "" or "M" or ":"
         ColoneT = ColoneT + 1
         Labyrinthe[LigneT][ColoneT] = re.sub("_", "T", Labyrinthe[LigneT][ColoneT])
     AfficherFogue()
@@ -71,7 +70,6 @@ def AvancerG(Labyrinthe): # Avancer à gauche de 1
         print("vous ne pouvez pas avancer, les murs du labyrinthe sont bien trop grand")
     else:
         Labyrinthe[LigneT][ColoneT] = re.sub("T", "_", Labyrinthe[LigneT][ColoneT]) 
-        #Labyrinthe[LigneT][ColoneT] ==  "_" or "M" or ":" 
         ColoneT = ColoneT - 1 
         Labyrinthe[LigneT][ColoneT] = re.sub("_", "T", Labyrinthe[LigneT][ColoneT])
     AfficherFogue()
@@ -83,9 +81,11 @@ def AvancerH(Labyrinthe): # Avancer à gauche de 1
         print("vous ne pouvez pas avancer, les murs du labyrinthe sont bien trop grand")
     else: 
         Labyrinthe[LigneT][ColoneT] = re.sub("T", "_", Labyrinthe[LigneT][ColoneT])
-        #Labyrinthe[LigneT][ColoneT] ==  "" or "M" or ":"
         LigneT = LigneT - 1
+        if Labyrinthe[LigneT][ColoneT] == "P":
+            Teleporteur12()
         Labyrinthe[LigneT][ColoneT] = re.sub("_", "T", Labyrinthe[LigneT][ColoneT])
+        Afficher()
     AfficherFogue()
     return LigneT,
 
@@ -95,11 +95,18 @@ def AvancerB(Labyrinthe): # Avancer en bas de 1
         print("vous ne pouvez pas avancer, les murs du labyrinthe sont bien trop grand")
     else: 
         Labyrinthe[LigneT][ColoneT] = re.sub("T", "_", Labyrinthe[LigneT][ColoneT])
-        #Labyrinthe[LigneT][ColoneT] ==  "" or "M" or ":"
         LigneT = LigneT + 1
         Labyrinthe[LigneT][ColoneT] = re.sub("_", "T", Labyrinthe[LigneT][ColoneT])
     AfficherFogue()
-    return LigneT,
+    return LigneT, ColoneT,
+
+def Teleporteur12():
+    #if Labyrinthe[LigneT][ColoneT] == "P":
+    P2 = re.sub("P", "+", Labyrinthe[LigneT][ColoneT + 14])
+    P1 = re.sub("P", "+", Labyrinthe[LigneT][ColoneT])
+    print(Labyrinthe[LigneT][ColoneT])      
+    Labyrinthe[LigneT][ColoneT] = Labyrinthe[LigneT][ColoneT + 15]
+    return Labyrinthe[LigneT][ColoneT],
 
 Minotaure = False 
 

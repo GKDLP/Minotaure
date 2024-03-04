@@ -3,7 +3,7 @@ import sys
 Labyrinthe = [["+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+","+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"],
               ["+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+","+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"],
               ["+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+","+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"],
-              ["+", "+", "+", "+", "+", "+", "_", "_", "_", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "_", "_", "_", "+", "+", "+"],
+              ["+", "+", "+", "+", "+", "+", "_", "_", "_", "+", "+", "+", "+", "+", "+", "+", "+", "_", "_", "_", "_", "_", "+", "+", "+"],
               ["+", "+", "+", "+", "_", "_", "_", "+", "_", "_", "_", "_", "_", "_", "+", "_", "_", "_", "+", "_", "+", "_", "+", "+", "+"],
               ["+", "+", "+", "+", "+", "+", "+", "+", "_", "+", "+", "+", "+", "_", "+", "+", "+", "_", "+", "M", "+", "_", "+", "+", "+"],
               ["+", "+", "+", "T", "_", "_", "_", "+", "_", "+", "+", "+", "_", "_", "+", "_", "+", "_", "+", "+", "+", "_", "+", "+", "+"],
@@ -98,14 +98,19 @@ def AvancerB(Labyrinthe): # Avancer en bas de 1
     return LigneT,
 
 Minotaure = False 
+Score = 100
 
-def VerifierM():
-    global Minotaure
+def VerifierM(): # Cette fonction vérifie le Minotaure
+    global Minotaure, Score
     if Labyrinthe[LigneT][ColoneT] == "M":
         Minotaure = True
         Labyrinthe[LigneT][ColoneT] = re.sub("M", "%", Labyrinthe[LigneT][ColoneT])
+        Score = Score + 50
+        print(Score)
+        print("Vous avez battue le Minotaure vous gagnez 50 point supplémentaire")
+    return Score
 
-def VerifierS():
+def VerifierS():  # Cette fonction vérifie la sortie 
     global Minotaure
     if Minotaure == True:
         print("Vous avez Vaincu le Minotaure")
@@ -131,18 +136,29 @@ else:
         direction = input("Entrez la direction du joueur(Z,D,Q,S):")
         if direction == "Z":
             AvancerH(Labyrinthe)
+            Score = Score - 1
             VerifierM()
         elif direction == "D":
             AvancerD(Labyrinthe)
+            Score = Score - 1
             VerifierM()
         elif direction == "Q":
             AvancerG(Labyrinthe)
+            Score = Score - 1
             VerifierM()
         elif direction == "S":
             AvancerB(Labyrinthe)
+            Score = Score - 1
             VerifierM()
         else:
             print("Veuillez entrez une des directions(Z,D,Q,S):")
+        if Score == 50:
+            print(Score)
+        if Score == 0:
+            print("-------------------------------------------")
+            print("Vous avez passer trop de temps dans le Labyrinthe, vous etes épuisé, vous sentez vos forces vous abandonnez ... BOO t nul ")
+            print("-------------------------------------------")
+            break
         if Labyrinthe[LigneT][ColoneT] == ":":
             VerifierS()
             break

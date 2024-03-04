@@ -59,7 +59,6 @@ def AvancerD(Labyrinthe): # Avancer à droite de 1
         print("vous ne pouvez pas avancer, les murs du labyrinthe sont bien trop grand")
     else: 
         Labyrinthe[LigneT][ColoneT] = re.sub("T", "_", Labyrinthe[LigneT][ColoneT])
-        #Labyrinthe[LigneT][ColoneT] ==  "" or "M" or ":"
         ColoneT = ColoneT + 1
         Labyrinthe[LigneT][ColoneT] = re.sub("_", "T", Labyrinthe[LigneT][ColoneT])
     AfficherFogue()
@@ -71,7 +70,6 @@ def AvancerG(Labyrinthe): # Avancer à gauche de 1
         print("vous ne pouvez pas avancer, les murs du labyrinthe sont bien trop grand")
     else:
         Labyrinthe[LigneT][ColoneT] = re.sub("T", "_", Labyrinthe[LigneT][ColoneT]) 
-        #Labyrinthe[LigneT][ColoneT] ==  "_" or "M" or ":" 
         ColoneT = ColoneT - 1 
         Labyrinthe[LigneT][ColoneT] = re.sub("_", "T", Labyrinthe[LigneT][ColoneT])
     AfficherFogue()
@@ -83,7 +81,6 @@ def AvancerH(Labyrinthe): # Avancer à gauche de 1
         print("vous ne pouvez pas avancer, les murs du labyrinthe sont bien trop grand")
     else: 
         Labyrinthe[LigneT][ColoneT] = re.sub("T", "_", Labyrinthe[LigneT][ColoneT])
-        #Labyrinthe[LigneT][ColoneT] ==  "" or "M" or ":"
         LigneT = LigneT - 1
         Labyrinthe[LigneT][ColoneT] = re.sub("_", "T", Labyrinthe[LigneT][ColoneT])
     AfficherFogue()
@@ -95,7 +92,6 @@ def AvancerB(Labyrinthe): # Avancer en bas de 1
         print("vous ne pouvez pas avancer, les murs du labyrinthe sont bien trop grand")
     else: 
         Labyrinthe[LigneT][ColoneT] = re.sub("T", "_", Labyrinthe[LigneT][ColoneT])
-        #Labyrinthe[LigneT][ColoneT] ==  "" or "M" or ":"
         LigneT = LigneT + 1
         Labyrinthe[LigneT][ColoneT] = re.sub("_", "T", Labyrinthe[LigneT][ColoneT])
     AfficherFogue()
@@ -118,22 +114,35 @@ def VerifierS():
     else: 
         print("Vous n'avez pas Vaincu le Minotaure, La sortie n'est pas ouvert.")
         
-while True:   #Le joueur entre la direction de son choix
-    direction = input("Entrez la direction du joueur(Z,D,Q,S):")
-    if direction == "Z":
-        AvancerH(Labyrinthe)
-        VerifierM()
-    elif direction == "D":
-        AvancerD(Labyrinthe)
-        VerifierM()
-    elif direction == "Q":
-        AvancerG(Labyrinthe)
-        VerifierM()
-    elif direction == "S":
-        AvancerB(Labyrinthe)
-        VerifierM()
-    else:
-        print("Veuillez entrez une des directions(Z,D,Q,S):")
-    if Labyrinthe[LigneT][ColoneT] == ":":
-        VerifierS()
-        break
+print("------------------------------------------------------------------")
+print("")
+print("Bienvenu dans le labyrinthe de Dédale")
+print("")
+print("Dans se jeu vous incarnerai Thésée, votre but est de vaincre 'Minos' le minotaure du labyrinthe puis de vous echapper du Labyrinthe")
+print("")
+game = input("Voulez-vous entrer dans le Labyrinthe ?   Y/N ")
+print("------------------------------------------------------------------")
+while game != "Y":
+    print("Zoulette reviens quand tu sera prêt")
+    game = input("Voulez-vous entrer dans le Labyrinthe ?   Y/N ")
+else:
+    AfficherFogue()
+    while True:   #Le joueur entre la direction de son choix
+        direction = input("Entrez la direction du joueur(Z,D,Q,S):")
+        if direction == "Z":
+            AvancerH(Labyrinthe)
+            VerifierM()
+        elif direction == "D":
+            AvancerD(Labyrinthe)
+            VerifierM()
+        elif direction == "Q":
+            AvancerG(Labyrinthe)
+            VerifierM()
+        elif direction == "S":
+            AvancerB(Labyrinthe)
+            VerifierM()
+        else:
+            print("Veuillez entrez une des directions(Z,D,Q,S):")
+        if Labyrinthe[LigneT][ColoneT] == ":":
+            VerifierS()
+            break
